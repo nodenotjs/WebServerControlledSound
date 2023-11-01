@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Bruninho Vingança!</title>
+    <script src="packets.js" defer></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <label id="connection-status"></label>
+    <br>
+    <label id="status"></label>
+    <br>
+    <label id="server-message"></label>
+    <br>
+    <br>
+    <label id="instructions">
+        <h3>Instruções:</h3>
+        1. <b>Clique em qualquer lugar na página</b> (necessário para ativar o player de música)<br>
+        2. Mantenha a aba do site aberto. Você pode navegar normalmente por outras páginas.<br>
+        3. Aumente o volume do pc no máximo para que o Bruno possa escutar o som na hora do intervalo :D<br>
+    </label>
+    <br>
+    <label id="play-remaining-time"></label>
+
+    <audio preload="auto" id="music" onplay="setStatus('Music Playing')" onerror="setStatus('Music Error!')" onpause="setStatus('Music Paused')" onabort="setStatus('Music Aborted')">
+        <source src="/files/music.mp3">
+    </audio>
+
+    <audio loop id="silent">
+        <source src="/files/silent.mp3">
+    </audio>
+</body>
+</html>
