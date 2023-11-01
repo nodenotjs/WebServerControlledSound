@@ -7,7 +7,7 @@ const app = express();
 
 const wsPort = 3001;
 const wsAdmPort = 3002;
-const port = 3000;
+const port = 80;
 
 const INTERACTION_ALERT_MESSAGE = "Por favor, clique em algum lugar na página. Isso é necessário para a ativação do player de música.";
 
