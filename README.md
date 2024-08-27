@@ -64,3 +64,4 @@ By default, no password is set for the control panel. Set the `PASSWD` environme
 # Notes
 - The control panel authentication system is certainly not secure. Do not use environment variables or store/transfer passwords in plain text.
 - The code was made in a few hours. Sorry for the lack of beauty
+- IP addresses and ports have been hardcoded. Search the project for `3000` or `ws:` to find the addresses that the client connects to/the server listens to.
