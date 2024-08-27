@@ -67,25 +67,62 @@ exports.Alert = class Alert {
 exports.SchedulePlay = class SchedulePlay {
     /**
      * 
-     * @param {number} destinationClockTime
-     * @param {number} destinationDiffTime
-     * @param {number} desiredDelay
+     * @param {number} delay
      */
-    constructor(destinationClockTime, destinationDiffTime, desiredDelay) {
-        this.destinationClockTime = destinationClockTime;
-        this.destinationDiffTime = destinationDiffTime;
-        this.desiredDelay = desiredDelay;
+    constructor(delay) {
+        this.delay = delay;
     }
-}
-
-exports.FirstInteraction = class FirstInteraction {
-    constructor() { }
 }
 
 exports.CancelSchedulePlay = class CancelSchedulePlay {
     constructor() { }
 }
 
+exports.ConnectedCount = class ConnectedCount {
+  /**
+   * @param {number} count
+   */  
+  constructor(count) {
+    this.count = count;    
+  }
+}
+
+exports.NotificationPermissionLevel = class NotificationPermissionLevel {
+  /**
+   * @param {string} level
+   */  
+  constructor(level) {
+    this.level = level;    
+  }
+}
+
+exports.ShowNotification = class ShowNotification {
+    /**
+    * @param {string} message
+    */  
+    constructor(message) {
+      this.message = message;    
+    }
+}
+
+exports.UserAgent = class UserAgent {
+    /**
+    * @param {string} userAgent
+    */  
+    constructor(agent) {
+      this.agent = agent;    
+    }
+}
+
+
+exports.PlayStop = class PlayStop {
+    /**
+    * @param {number} duration
+    */  
+    constructor(duration) {
+      this.duration = duration;    
+    }
+}
 
 // **IDS
 
@@ -97,10 +134,14 @@ exports.SERVER_TO_CLIENT_PACKET_IDS = {
     ALERT: 4,
     SCHEDULE_PLAY: 5,
     CANCEL_SCHEDULE_PLAY: 6,
+    CONNECTED_COUNT: 7,
+    SHOW_NOTIFICATION: 8,
+    PLAYSTOP: 9,
 }
 
 exports.CLIENT_TO_SERVER_PACKET_IDS = {
     PONG: 0,
     STATUS: 1,
-    FIRST_INTERACTION: 2,
+    NOTIFICATION_PERMISSION_LEVEL: 3,
+    USER_AGENT: 4,
 }

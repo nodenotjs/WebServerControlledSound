@@ -6,6 +6,11 @@ const elemConnectionStatus = document.getElementById('connection-status');
 const elemClients = document.getElementById('clients-status');
 /** @type {HTMLInputElement} */
 const elemScheduleDelayInput = document.getElementById('schedule-music-delay-input');
+/** @type {HTMLTextAreaElement} */
+const elemSendNotificationInput = document.getElementById('notification-message-input');
+/** @type {HTMLInputElement} */
+const elemPlayStop = document.getElementById('playstop-music-duration-input');
+
 
 const CONNECTION_STATUS = {
     CONNECTING: "Connecting...",
@@ -16,12 +21,16 @@ const CONNECTION_STATUS = {
 
 function init() {
     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
-    ws = new WebSocket("ws://192.168.1.7:3002/");
+    connect()
     
     ws.addEventListener("open", on_ws_open)
     ws.addEventListener("message", on_ws_message)
     ws.addEventListener("close", on_ws_close)
     ws.addEventListener("error", on_ws_error)
+}
+
+function connect() {
+    ws = new WebSocket("ws://localhost:3000/");
 }
 
 /**
@@ -30,7 +39,7 @@ function init() {
  */
 function on_ws_open(event) {
     setConnectionStatus(CONNECTION_STATUS.CONNECTED);
-    send(localStorage.password)
+    sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.IM_THE_ADMIN, new ImTheAdmin(localStorage.password)));
 }
 
 /**
@@ -56,7 +65,8 @@ function on_ws_message(event) {
 */
 function on_ws_close(event) {
     setConnectionStatus(CONNECTION_STATUS.CLOSED);
-
+    console.log("Disconnected.")
+    //connect();
 }
 
 /**
@@ -85,11 +95,6 @@ function sendForceStopMusic() {
     sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.FORCE_MUSIC_STOP, packet))
 }
 
-function sendRequestUserIteractionForNonIteractors() {
-    let packet = new RequestUserIteractionForNonIteractors();
-    sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.REQUEST_USER_ITERACTION_FOR_NON_ITERACTORS, packet))
-}
-
 function sendSchedulePlay(delay) {
     let packet = new SchedulePlayTo(delay);
     sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.SCHEDULE_PLAY_TO, packet))
@@ -98,6 +103,16 @@ function sendSchedulePlay(delay) {
 function sendCancelSchedulePlay() {
     let packet = new CancelSchedulePlayTo();
     sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.CANCEL_SCHEDULE_PLAY_TO, packet))
+}
+
+function sendSendNotification(message) {
+    let packet = new SendNotification(message);
+    sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.SEND_NOTIFICATION, packet))
+}
+
+function sendPlayStop(duration) {
+    let packet = new PlayStop(duration);
+    sendJSON(new IDPacket(ADMIN_TO_SERVER_PACKET_IDS.PLAYSTOP, packet))
 }
 
 function setConnectionStatus(status) {
@@ -117,10 +132,6 @@ function on_stop_music_button_clicked() {
     sendForceStopMusic();
 }
 
-function on_request_iretaction_button_clicked() {
-    sendRequestUserIteractionForNonIteractors();
-}
-
 function on_schedule_music_play_button_clicked() {
     let delay = parseInt(elemScheduleDelayInput.value);
     sendSchedulePlay(delay);
@@ -128,6 +139,15 @@ function on_schedule_music_play_button_clicked() {
 
 function on_cancel_schedule_music_play_button_clicked() {
     sendCancelSchedulePlay();
+}
+
+function on_send_notification_button_clicked() {
+    sendSendNotification(elemSendNotificationInput.value)
+}
+
+function on_playstop_button_clicked() {
+    let duration = parseInt(elemPlayStop.value);
+    sendPlayStop(duration)
 }
 
 init()

@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
-    <title>Bruninho Vingança!</title>
+    <title>interhacker</title>
     <script src="packets.js" defer></script>
     <script src="index.js" defer></script>
 </head>
+
 <body>
-    <label id="connection-status"></label>
-    <br>
-    <label id="status"></label>
-    <br>
-    <label id="server-message"></label>
-    <br>
-    <br>
+    <button id="pre-click" onclick="on_preclick_clicked()" style="width: 100%; font-size: 36px"><b>Clique para se conectar</b></button>
+    <div id="content" hidden>
+        <label id="connection-status"></label>
+        <br hidden>
+        <label id="status" hidden></label>
+        <br>
+        <label id="connected"></label>
+        <br>
+        <br>
+        <label id="server-message"></label>
+        <br>
+        <br>
+        <label id="play-remaining-time"></label>
+        <br>
+        <br>
+
+        <audio preload="auto" id="music" onplay="setStatus('Music Playing')" onerror="setStatus('Music Error!')"
+            onpause="setStatus('Music Paused')" onabort="setStatus('Music Aborted')">
+            <source src="/files/music.mp3">
+        </audio>
+
+        <audio loop id="silent">
+            <source src="/files/silent.mp3">
+        </audio>
+
+        <audio preload="auto" id="music-preload">
+            <source src="/files/music.mp3">
+        </audio>
+    </div>
+    
+    <label id="about">
+        <h1>O que é esse site?</h1>
+        O Site nada mais é do que um tocador de áudio remoto. O propósito dele é permitir com que todos os
+        computadores da sala toquem o mesmo áudio ao mesmo tempo.
+        <br>
+        No horário do intervalo, o áudio será tocado com uma pequena mensagem no começo dizendo que está na hora do
+        invervalo, seguido do hino do Internacional.
+        <br><br>
+        O site <b>toca um som inaudível para evitar a hibernação da aba</b>. Se você vir mídia tocando vindo do site, <b>não a pause!</b>
+        <br><br>
+        <br><br>
+        <b>É recomendado que você ative as notificações.</b> Assim, você pode receber alertas para aumentar o volume
+        ou outras comunicações importantes para que isso dê certo!<br>
+    </label>
+    <button onclick="on_enableNotificationsButton_clicked()" style="font-size: 18px;"><b>Ative as notificações</b></button>
+
     <label id="instructions">
-        <h3>Instruções:</h3>
-        1. <b>Clique em qualquer lugar na página</b> (necessário para ativar o player de música)<br>
-        2. Mantenha a aba do site aberto. Você pode navegar normalmente por outras páginas.<br>
-        3. Aumente o volume do pc no máximo para que o Bruno possa escutar o som na hora do intervalo :D<br>
+        <h1>Instruções:</h1>
+        1. <b>Aumente o volume do PC</b> no máximo. <i>Ative as notificações para ser lembrado disso</i><br>
+        2. <b>Mantenha a aba do site aberto.</b> Você pode navegar normalmente por outras páginas.<br>
     </label>
     <br>
-    <label id="play-remaining-time"></label>
-
-    <audio preload="auto" id="music" onplay="setStatus('Music Playing')" onerror="setStatus('Music Error!')" onpause="setStatus('Music Paused')" onabort="setStatus('Music Aborted')">
-        <source src="/files/music.mp3">
-    </audio>
-
-    <audio loop id="silent">
-        <source src="/files/silent.mp3">
-    </audio>
+    <h2>Conecte em todos os seus dispositivos!</h2> Você pode conectar no celular também!!!
 </body>
+
 </html>

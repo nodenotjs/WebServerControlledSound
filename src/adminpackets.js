@@ -24,11 +24,6 @@ exports.ForceMusicStop = class ForceMusicStop {
     }
 }
 
-exports.RequestUserIteractionForNonIteractors = class RequestUserIteractionForNonIteractors {
-    constructor() {
-    }
-}
-
 exports.SchedulePlayTo = class SchedulePlayTo {
     /**
      * 
@@ -44,6 +39,36 @@ exports.CancelSchedulePlayTo = class CancelSchedulePlayTo {
     }
 }
 
+exports.ImTheAdmin = class ImTheAdmin {
+    /**
+     * 
+     * @param {string} password 
+     */
+    constructor(password) {
+        this.password = password;
+    }
+}
+
+exports.SendNotification = class SendNotification {
+    /**
+     * 
+     * @param {string} message 
+     */
+    constructor(message) {
+        this.password = message;
+    }
+}
+
+exports.PlayStop = class PlayStop {
+    /**
+     * 
+     * @param {number} duration 
+     */
+    constructor(duration) {
+        this.duration = duration;
+    }
+}
+
 exports.SERVER_TO_ADMIN_PACKET_IDS = {
     UPDATE_CLIENTS_STATUS: 0
 }
@@ -51,7 +76,9 @@ exports.SERVER_TO_ADMIN_PACKET_IDS = {
 exports.ADMIN_TO_SERVER_PACKET_IDS = {
     FORCE_MUSIC_PLAY: 0,
     FORCE_MUSIC_STOP: 1,
-    REQUEST_USER_ITERACTION_FOR_NON_ITERACTORS: 2,
     SCHEDULE_PLAY_TO: 3,
     CANCEL_SCHEDULE_PLAY_TO: 4,
+    SEND_NOTIFICATION: 5,
+    PLAYSTOP: 6,
+    IM_THE_ADMIN: 99999,
 }
